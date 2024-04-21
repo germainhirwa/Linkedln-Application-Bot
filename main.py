@@ -3,11 +3,16 @@ from selenium.common import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
+import os
+from dotenv import load_dotenv, find_dotenv
 
-ACCOUNT_EMAIL = "ghirwa1@swarthmore.edu"
-ACCOUNT_PASSWORD = "MAMAPAPA"
-PHONE = "4844744375"
+dotenv_path = find_dotenv()
+load_dotenv(dotenv_path)
 
+#Load credentials from environmental variables
+ACCOUNT_EMAIL = os.getenv("ACCOUNT_EMAIL")
+ACCOUNT_PASSWORD = os.getenv("ACCOUNT_PASSWORD")
+PHONE = os.getenv("PHONE")
 
 def abort_application():
     # Click Close Button
@@ -29,10 +34,10 @@ driver = webdriver.Chrome(options=chrome_options)
 driver.get("https://www.linkedin.com/jobs/search/?currentJobId=3586148395&f_LF=f_AL&geoId=101356765&"
            "keywords=python&location=London%2C%20England%2C%20United%20Kingdom&refresh=true")
 
-# # Click Reject Cookies Button
-# time.sleep(2)
-# reject_button = driver.find_element(by=By.CSS_SELECTOR, value='button[action-type="DENY"]')
-# reject_button.click()
+# Click Reject Cookies Button
+time.sleep(2)
+reject_button = driver.find_element(by=By.CSS_SELECTOR, value='button[action-type="DENY"]')
+reject_button.click()
 
 # Click Sign in Button
 time.sleep(5)
@@ -47,8 +52,8 @@ password_field = driver.find_element(by=By.ID, value="password")
 password_field.send_keys(ACCOUNT_PASSWORD)
 password_field.send_keys(Keys.ENTER)
 
-# # CAPTCHA - Solve Puzzle Manually
-# input("Press Enter when you have solved the Captcha")
+# CAPTCHA - Solve Puzzle Manually
+input("Press Enter when you have solved the Captcha")
 
 # Get Listings
 print("Hello")
